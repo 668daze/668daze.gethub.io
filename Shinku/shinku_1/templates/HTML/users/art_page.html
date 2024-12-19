@@ -1,0 +1,346 @@
+{% extends 'HTML/users/user_base.html' %}
+{% load static %}
+{% block add_styles %}
+    <style>
+        .margin_top_15px {
+            margin-top: 15px;
+        }
+
+        .margin_top_30px {
+            margin-top: 20px;
+        }
+
+        .page_text {
+            color: rgb(255, 255, 255);
+        }
+
+        #info_bg {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+        }
+
+        #info_bg_margin {
+            margin-top: 0px;
+        }
+
+        #user_photo {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 10px;
+        }
+
+        #user_photo_modal {
+            width: 100px;
+            height: 100px;
+            outline: 1px solid;
+            outline-color: rgba(0, 0, 0, 0.99);
+            margin-top: -40px;
+            box-shadow: 0px 0px 50px 0px rgb(55, 55, 55);
+        {#margin-bottom: 10px;#}
+        }
+
+
+        div {
+            box-shadow: 0 0 0 0px rgba(255, 0, 0, 0.5);
+        }
+
+        .btn {
+            border-radius: 30px;
+        }
+
+        a {
+            color: #838383;
+        }
+
+        a:hover {
+            color: rgb(179, 179, 179);
+        }
+
+        .modal-content {
+            background-color: rgba(22, 29, 28, 0.48);
+            border: 1px solid rgb(97, 97, 97);
+            border-radius: 10px;
+            color: #ffffff;
+            box-shadow: #00eaff6b 0px 0px 100px 5px;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-body {
+            border-bottom: 0px solid #616161;
+
+            border-radius: 10px;
+
+
+        }
+
+        .img_height_300 {
+            max-height: 600px;
+            object-fit: contain;
+        }
+
+        .rounded_1 {
+            border-radius: 20px;
+
+        }
+
+
+        .img-hold-anime {
+            height: 300px;
+            backdrop-filter: blur(0px) brightness(100%);
+            margin-top: -300px;
+
+            transition: backdrop-filter 2s;
+            -webkit-transition: backdrop-filter 2s; /* Safari */
+
+        }
+
+        .img-hold-anime:hover {
+            backdrop-filter: blur(11px) brightness(50%);
+
+        }
+
+
+        .img_show {
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+            margin-top: 10px;
+            margin-left: 20px;
+            margin-right: 20px;
+            border-radius: 15px;
+
+        }
+
+        .img_show_mask {
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+            margin-top: 10px;
+            margin-left: -270px;
+            margin-right: 20px;
+            border-radius: 15px;
+            backdrop-filter: brightness(100%);
+            transition: backdrop-filter 0.5s;
+            -webkit-transition: backdrop-filter 0.5s; /* Safari */
+        }
+
+        .img_show_mask:hover {
+            backdrop-filter: brightness(50%);
+        }
+
+        .img_show_title {
+            width: 250px;
+            display: inline-block;
+            margin-left: 20px;
+            margin-right: 20px;
+            margin-bottom: 30px;
+            margin-top: 10px;
+            font-size: 18px
+
+        }
+
+        .img_show_price {
+            color: #fdd96a;
+            width: 250px;
+            display: inline-block;
+            margin-left: 20px;
+            margin-right: 20px;
+            margin-bottom: 30px;
+            margin-top: -30px;
+            font-size: 26px;
+        }
+
+        .good_tips {
+            margin-bottom: -0px;
+            margin-top: -0px;
+            margin-left: 0px;
+            margin-right: 0px;
+            z-index: 1;
+            font-size: 13px;
+            height: 20px;
+        }
+
+        .mysvg {
+            color: rgb(101, 101, 101);
+            margin-left: 8px;
+            margin-right: 8px;
+        }
+
+        .mysvg2 {
+            color: rgb(101, 101, 101);
+        }
+    </style>
+{% endblock %}
+
+
+
+{% block content %}
+
+
+
+
+    <div class="row">
+        <div class=" col-8 container rounded_1"
+             style="background-color: rgba(255,255,255,0.13);min-width: 1000px;margin-top: 50px;display: inline-block">
+            <!- 展示图 -！>
+
+
+            {% for i in '12345' %}
+                <img src="{% static 'images/test/info_bg.png' %}"
+                     class="d-block w-100 img_height_300 "
+                     alt="...">
+            {% endfor %}
+
+
+            <!-展示图END -！>
+
+            <div class="float-right">
+
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                     class="bi bi-star-fill mysvg" style="margin-top: 20px"
+                     viewBox="0 0 16 16">
+                    <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                </svg>
+
+
+                <!- more -!>
+                <div class="btn-group">
+
+                    <svg data-toggle="dropdown" xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+                         fill="currentColor"
+                         class="bi bi-three-dots mysvg"
+                         viewBox="0 0 16 16" style="margin-top: 17px">
+                        <path d="M3 9.5a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3zm5 0a1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 0 3z"/>
+                    </svg>
+                    <div class="dropdown-menu dropdown-menu-end">
+                        <button class="dropdown-item" type="button">
+                            <span style="font-size: 15px">举报</span>
+                        </button>
+                        <button class="dropdown-item" type="button">
+                            <span style="font-size: 15px">我的订单</span>
+                        </button>
+                    </div>
+                </div>
+                <!- moreEND -!>
+            </div>
+
+            <div class="col-9 container " style="margin-top: 100px">
+
+
+                <h2 class="page_text">The goods title{{ title }}</h2>
+                <h5 class="page_text">The goods title2{{ title }}</h5>
+                <div class="page_text">the_sample_info{{ info }}</div>
+                <div class="margin_top_30px">
+                    <a href="#" class="badge badge-warning good_tips" style="color: #ffffff">{{ good_type }}type of
+                        goods</a>
+                    {% for tag in '1234567' %}
+                        <a href="#" class="text-decoration-none"
+                           style="margin-left: 10px;color: #0dcaf0">@tag----- {{ tag }}</a>
+                    {% endfor %}
+
+                </div>
+            </div>
+
+
+            <div class="col-10 container " style="margin-top: 50px">
+                <img class="rounded-circle" src="{% static 'main2.PNG' %}" alt="" id="user_photo">
+                <span class="page_text" style="font-size: 20px">User_name</span>
+                <button type="button" class="btn btn-primary"
+                        style="margin-left: 50px;width: 110px;height: 35px;font-size: 13px">灌注
+                </button>
+                <a href="#" class="text-decoration-none float-right"
+                   style="">看看你的全部商品</a>
+                <div style="margin-top: 10px">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                         class="bi bi-eye-fill mysvg2"
+                         viewBox="0 0 16 16">
+                        <path d="M10.5 8a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
+                        <path d="M0 8s3-5.5 8-5.5S16 8 16 8s-3 5.5-8 5.5S0 8 0 8zm8 3.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/>
+                    </svg>
+
+                    <span style="font-size: 12px" class="page_text">1231231</span>
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                         class="bi bi-star-fill mysvg2" style=""
+                         viewBox="0 0 16 16">
+                        <path d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"/>
+                    </svg>
+
+                    <span style="font-size: 12px" class="page_text">1231231</span>
+                </div>
+                <div style="font-size: 13px;margin-top: 10px" class="page_text ">发布于2024-12-12</div>
+            </div>
+
+
+            <hr style="border: rgba(101,101,101,0.58) 1px solid;">
+
+            <div class="col-8 container">
+                <div class="page_text " style="font-size: 25px;font-weight: bold;margin-bottom: 30px">评论</div>
+                <form class="row col container">
+                    {% csrf_token %}
+                    <img class="rounded-circle" src="{% static 'main2.PNG' %}" alt="" id="user_photo"
+                         style="width: 35px;height: 35px">
+                    <div class="col-10">
+                        <input type="text" class="form-control" placeholder="说点什么">
+                    </div>
+                    <button type="submit" class="btn btn-primary mb-2 col" style="border-radius: 5px">发送</button>
+                </form>
+
+
+                {% for i in '123' %}
+                    <div class="container" style="margin-left: 120px">
+                        <img class="rounded-circle" src="{% static 'main2.PNG' %}" alt="" id="user_photo"
+                             style="margin-bottom: -70px;margin-left: -70px">
+                        <div class="page_text" style="font-size: 20px;font-weight: bold">Username</div>
+                        <div class="page_text" style="font-size: 12px">2024-1-1</div>
+                        <div class="page_text">
+                            user_textuser_textuser_textuser_textuser_textuser_textuser_textuser_textuser_text
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+            <div style="height: 50px"></div>
+        </div>
+
+
+    </div>
+
+
+    <!- 作品 -！>
+    <div class="page_text "
+         style="font-size: 25px;width: 1470px;margin-left: 200px;margin-bottom: 20px;margin-top: 50px">相关作品
+    </div>
+
+    {% for i in '123' %}
+        <div style="width: 1500px; margin: auto" class="row">
+
+
+            {% for n in '12345' %}
+                <img src="{% static 'bg_homepage.png' %}" alt="" class=" img_show text-center">
+
+                <a href="">
+                    <div class="img_show_mask"></div>
+                </a>
+            {% endfor %}
+
+
+
+            {% for n in '12345' %}
+
+
+                <div class="img_show_title page_text">
+
+                    the page title #{{ i }}{{ n }}
+
+                </div>
+            {% endfor %}
+
+
+        </div>
+    {% endfor %}
+
+    <!- 作品END -！>
+
+{% endblock %}

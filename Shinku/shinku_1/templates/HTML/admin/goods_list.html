@@ -1,0 +1,183 @@
+{% extends 'HTML/admin/Admin_base.html' %}
+
+{% block content %}
+    <style>
+
+    </style>
+
+    <!-- Button trigger modal -->
+
+
+    <div>
+        <div class="float-left">
+            <a href="/admin_goods/add">
+                <button type="button" class="btn btn-success">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                         class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+                    </svg>
+                    增加用户
+                </button>
+            </a>
+
+        </div>
+        <!-- 搜索栏 -->
+        <form method="get">
+            <div class="input-group mb-3 float-right" style="width: 300px;">
+                <input type="text" class="form-control" placeholder="搜索商品(名称)" aria-describedby="basic-addon2"
+                       name="str" value="{{ user_input }}">
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-secondary">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                             class="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- 数据表头 -->
+    <li class="list-group-item list-group-item-warning " aria-current="true">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+             class="bi bi-card-list" viewBox="0 0 16 16">
+            <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
+            <path d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-1-5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zM4 8a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm0 2.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"/>
+        </svg>
+        商品列表
+        {{ btn_show_size }}
+
+
+    </li>
+    <!-- 数据表 -->
+    <table class="table table-striped table-dark">
+        <thead>
+        <tr>
+            {% for field in goods_fields %}
+                <th scope="col">{{ field }}</th>
+            {% endfor %}
+            <th scope="col">操作</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+        {% for queryset in goods %}
+            <tr uid="{{ queryset.id }}">
+                <td>{{ queryset.id }}</td>
+                <td>{{ queryset.name }}</td>
+                <td>{{ queryset.owner }}</td>
+                <td>{{ queryset.price }}</td>
+                <td>{{ queryset.create_time }}</td>
+                <td>{{ queryset.description }}</td>
+                <td>{{ queryset.main_type }}</td>
+
+                 <td>
+                    {{ queryset.get_status_display }}
+                    {% if queryset.status == 0 %}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor"
+                             class="bi bi-circle" viewBox="0 0 16 16"
+                             style="color: #616161;filter: drop-shadow(0px 0px 6px #373737);">
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+                        </svg>
+                    {% elif queryset.status == 1 %}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor"
+                             class="bi bi-circle-fill" viewBox="0 0 16 16"
+                             style="color: #45e145; filter: drop-shadow(0px 0px 5px greenyellow);">
+                            <circle cx="8" cy="8" r="8"/>
+                        </svg>
+                    {% else %}
+                        <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor"
+                             class="bi bi-circle-fill" viewBox="0 0 16 16"
+                             style="color: #b80b0b; filter: drop-shadow(0px 0px 5px #f81515);">
+                            <circle cx="8" cy="8" r="8"/>
+                        </svg>
+                    {% endif %}
+                </td>
+                <td>
+
+                    <a href="/admin_goods/{{ queryset.id }}/edit">
+                        <button type="button" class="btn btn-secondary btn-sm">修改</button>
+                    </a>
+                    <button uid="{{ queryset.id }}" type="button" class="btn btn-danger btn-sm delete_btn">删除</button>
+                </td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+    <!-- 分页 -->
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+
+            {{ page_string }}
+
+
+        </ul>
+    </nav>
+
+    <!-- Modal  delete对话框 -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content"
+                 style="color: red;rgba(139,0,0,0.4); box-shadow: rgba(184,11,11,0.55) 0px 0px 100px 5px">
+                <div class="modal-header" style="color: red">
+                    <h5 class="modal-title" id="exampleModalLabel">警告</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    这将会删除所有关联数据
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                    <button id="btnConfirmDelete" type="button" class="btn btn-danger">确认删除</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+
+
+{% block js %}
+    <script type="text/javascript">
+        var DELETE_ID;
+
+        $(function () {
+            bindBtnDeleteEvent();
+            bindBtnConfirmDelete();
+        })
+
+        function bindBtnDeleteEvent() {
+            $('.delete_btn').click(function () {
+                //点击删除
+                $("#deleteModal").modal('show');
+                //获取删除对象ID
+                DELETE_ID = $(this).attr('uid');
+
+            })
+        }
+
+        function bindBtnConfirmDelete() {
+            $("#btnConfirmDelete").click(function () {
+                $.ajax({
+                    url: "admin_goods/" + DELETE_ID + "/delete/",
+                    type: "GET",
+                    dataType: "JSON",
+                    success: function (res) {
+                        if (res.status) {
+                            $("#deleteModal").modal('hide');
+                            $("tr[uid='" + DELETE_ID + "']").remove();
+                        } else {
+                            alert(res.error);
+                        }
+                    }
+                })
+            })
+        }
+
+    </script>
+{% endblock %}

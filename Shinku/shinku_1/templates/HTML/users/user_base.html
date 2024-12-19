@@ -1,0 +1,329 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'plugins/bootstrapv4/css/bootstrap.min.css' %}">
+
+    <style>
+
+        /* 滚动条整体样式 */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+            background-color: rgba(255, 255, 255, 0.13);
+            border-radius: 10px;
+        }
+
+        /* 滚动条轨道样式 */
+        ::-webkit-scrollbar-track {
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            background-color: rgba(255, 255, 255, 0.13);
+        }
+
+        /* 滚动条滑块样式 */
+        ::-webkit-scrollbar-thumb {
+            border-radius: 10px;
+            -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, .3);
+            background-color: #555;
+        }
+
+
+        #navbar_input {
+            width: 500px;
+            height: 35px;
+            border-radius: 6px;
+            background-color: rgba(255, 255, 255, 0.13);
+            color: rgba(255, 255, 255, 0.75);
+            border: None;
+        }
+
+        .svg_margin1 {
+            color: rgb(132, 132, 132);
+            margin-right: 30px;
+        }
+
+        .svg_margin2 {
+            color: rgb(132, 132, 132);
+            margin-right: 20px;
+        }
+
+        svg:hover {
+            color: rgb(255, 255, 255);
+        }
+
+        .dropdown-menu {
+            margin-top: 30px;
+            background-color: rgba(255, 255, 255, 0.13);
+            backdrop-filter: blur(20px) brightness(50%);
+            border-radius: 15px;
+            box-shadow: 0 0px 50px rgb(244, 230, 173);
+        }
+
+
+        .dropdown-item {
+            color: rgba(255, 255, 255, 0.75);
+        }
+
+        .dropdown-item:hover {
+            color: rgba(255, 255, 255, 0.75);
+            background-color: rgba(255, 255, 255, 0.13);
+            border-radius: 15px;
+        }
+
+        .nav-link, .nav-tabs .nav-link.active {
+            color: #ffffff;
+            background-color: #f5f5f500;
+            border-color: rgba(7, 7, 7, 0);
+            border-top: #ffda6a 4px solid;
+
+            border-radius: 0;
+        }
+
+        .nav-link {
+            color: rgb(101, 101, 101);
+            font-size: 20px;
+            margin: 10px;
+        }
+
+        .nav-tabs {
+            border-bottom: 2px solid rgba(255, 255, 255, 0);
+        }
+
+        .nav-tabs .nav-link:focus, .nav-tabs .nav-link:hover {
+            color: rgba(255, 255, 255, 0.75);
+            isolation: isolate;
+            border-color: rgba(7, 7, 7, 0);
+            border-top: #ffda6a 4px solid;
+            border-radius: 0;
+        }
+
+        .msg-item {
+            width: 300px;
+        }
+
+        .msg-item:hover {
+            background-color: rgba(255, 255, 255, 0.44);
+        }
+
+        .img_shopcar {
+            width: 130px;
+            height: 130px;
+            object-fit: cover;
+            border-radius: 15px;
+            margin: 10px;
+        }
+
+        .card {
+            background-color: rgba(0, 0, 0, 0.48);
+            margin: 10px;
+        }
+
+
+    </style>
+    {% block add_styles %}
+
+
+    {% endblock %}
+
+</head>
+<body style="background-color: #373737">
+<nav class="navbar navbar-expand navbar-dark bg-dark" style="min-width: 1200px;">
+    <a class="navbar-brand" href="#">ShinkuMod</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <div style="margin: auto; margin-left: auto; margin-right: auto; text-align: center">
+            <form class="form-inline my-2 my-lg-0">
+                <input id="navbar_input" class="form-control mr-sm-2" type="search" placeholder="Search"
+                       aria-label="Search">
+            </form>
+        </div>
+
+
+        <!- add -!>
+        <div class="btn-group">
+
+            <button class="btn btn-secondary" data-toggle="dropdown"
+                    style="width: 110px;border-radius: 15px;margin-right: 50px;">
+                上传
+            </button>
+
+            <div class="dropdown-menu dropdown-menu-right">
+                <button class="dropdown-item" type="button">
+                    <svg style="margin-right: 8px" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                         fill="currentColor"
+                         class="bi bi-image" viewBox="0 0 16 16">
+                        <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
+                        <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"/>
+                    </svg>
+                    <span style="font-size: 15px">上传作品</span>
+                </button>
+                <button class="dropdown-item" type="button">
+                    <svg style="margin-right: 8px" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                         fill="currentColor"
+                         class="bi bi-list-ul" viewBox="0 0 16 16">
+                        <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5z"></path>
+                    </svg>
+                    <span style="font-size: 15px">上传商品</span>
+                </button>
+            </div>
+        </div>
+        <!- addEND -!>
+
+
+        <!- mgs -!>
+        <div class="btn-group">
+            <svg data-toggle="dropdown" xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor"
+                 class="bi bi-bell-fill svg_margin1"
+                 viewBox="0 0 16 16">
+                <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zm.995-14.901a1 1 0 1 0-1.99 0A5.002 5.002 0 0 0 3 6c0 1.098-.5 6-2 7h14c-1.5-1-2-5.902-2-7 0-2.42-1.72-4.44-4.005-4.901z"/>
+            </svg>
+
+            <div class="dropdown-menu dropdown-menu-right" style="margin-right: -50px;">
+                <div class="overflow-auto" style="max-height: 300px;">
+                    <h4 class="text-center" style="color: white;margin-bottom: 20px">通知</h4>
+                    {% for i in '12345678' %}
+                        <a class="msg-item" style="display: block" href="">
+                            <img class="rounded-circle float-left" src="../static/main2.PNG"
+                                 style="width: 50px;height: 50px;margin:0 10px">
+                            <div style="font-size: 17px;font-weight: bold;color: white">Username</div>
+                            <div style="font-size: 10px;color: white">2024-12-12:12:10</div>
+                            <div style="font-size: 12px;color: white">我刚刚管住了你</div>
+                        </a>
+                    {% endfor %}
+                    <div style="width: 1px;height: 30px"></div>
+                </div>
+            </div>
+        </div>
+        <!- mgsEND -!>
+        <!- mail -!>
+        <div class="btn-group">
+            <svg data-toggle="dropdown" xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor"
+                 class="bi bi-envelope-fill svg_margin1"
+                 viewBox="0 0 16 16">
+                <path d="M.05 3.555A2 2 0 0 1 2 2h12a2 2 0 0 1 1.95 1.555L8 8.414.05 3.555ZM0 4.697v7.104l5.803-3.558L0 4.697ZM6.761 8.83l-6.57 4.027A2 2 0 0 0 2 14h12a2 2 0 0 0 1.808-1.144l-6.57-4.027L8 9.586l-1.239-.757Zm3.436-.586L16 11.801V4.697l-5.803 3.546Z"/>
+            </svg>
+
+            <div class="dropdown-menu dropdown-menu-right" style="margin-right: -50px;">
+                <div class="overflow-auto" style="max-height: 300px;">
+                    <h4 class="text-center" style="color: white;margin-bottom: 20px">邮件</h4>
+                    {% for i in '12345678' %}
+                        <a class="msg-item" style="display: block" href="">
+                            <img class="rounded-circle float-left" src="../static/main2.PNG"
+                                 style="width: 50px;height: 50px;margin:0 10px">
+                            <div style="font-size: 17px;font-weight: bold;color: white">Username</div>
+                            <div style="font-size: 10px;color: white">2024-12-12:12:10</div>
+                            <div style="font-size: 12px;color: white">我刚刚管住了你</div>
+                        </a>
+                    {% endfor %}
+                    <a style="margin:10px ;display: block;font-size: 12px" class="text-center ">查看全部</a>
+                </div>
+            </div>
+        </div>
+        <!- mailEND -!>
+
+        <img class="rounded-circle float-right" src="../static/main2.PNG"
+             style="width: 40px;height: 40px;margin-right: 10px;">
+        <!- more -!>
+        <div class="btn-group">
+            <svg data-toggle="dropdown" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                 class="bi bi-caret-down-fill svg_margin2" viewBox="0 0 16 16">
+                <path d="M7.247 11.14 2.451 5.658C1.885 5.013 2.345 4 3.204 4h9.592a1 1 0 0 1 .753 1.659l-4.796 5.48a1 1 0 0 1-1.506 0z"/>
+            </svg>
+
+            <div class="dropdown-menu dropdown-menu-right">
+                <button class="dropdown-item" type="button">
+                    <svg style="margin-right: 8px" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                         fill="currentColor"
+                         class="bi bi-person-fill" viewBox="0 0 16 16">
+                        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                    </svg>
+                    <span style="font-size: 15px">个人界面</span>
+                </button>
+                <button class="dropdown-item" type="button">
+                    <svg style="margin-right: 8px" xmlns="http://www.w3.org/2000/svg" width="20" height="20"
+                         fill="currentColor"
+                         class="bi bi-list-ul" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                              d="M5 11.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm-3 1a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm0 4a1 1 0 1 0 0-2 1 1 0 0 0 0 2z"/>
+                    </svg>
+                    <span style="font-size: 15px">我的订单</span>
+                </button>
+                <button class="dropdown-item" type="button">
+                    <svg style="margin-right: 8px" xmlns="http://www.w3.org/2000/svg" width="18" height="18"
+                         fill="currentColor"
+                         class="bi bi-bag-fill" viewBox="0 0 16 16">
+                        <path d="M8 1a2.5 2.5 0 0 1 2.5 2.5V4h-5v-.5A2.5 2.5 0 0 1 8 1zm3.5 3v-.5a3.5 3.5 0 1 0-7 0V4H1v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V4h-3.5z"/>
+                    </svg>
+                    <span style="font-size: 15px">我的商品</span>
+                </button>
+            </div>
+        </div>
+        <!- moreEND -!>
+        <!- shop car -!>
+        <div class="btn-group">
+            <svg data-toggle="dropdown" xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor"
+                 class="bi bi-cart-fill svg_margin2"
+                 viewBox="0 0 16 16">
+                <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+            </svg>
+
+            <div class="dropdown-menu dropdown-menu-right " style="width: 700px">
+                <div class="overflow-auto" style="max-height: 500px;">
+                    <h3 class="text-center text-white " style="margin: 20px">购物车</h3>
+                    {% for i in '1234' %}
+                        <div class="card text-white  " style="border-radius: 15px;height: 150px">
+                            <div class="row no-gutters ">
+                                <div class="">
+                                    <img src="{% static 'images/login/background.jpg' %}" alt="..." style=""
+                                         class="img_shopcar">
+                                </div>
+                                <div class="">
+                                    <div class="card-body">
+                                        <h5 class="card-title text-truncate" style="max-width: 400px">Card title</h5>
+                                        <p class="card-text text-truncate" style="max-width: 400px">This is a wider
+                                            lThis is
+                                            a wider lThis is a wider lThis is a wider lThis is a wider l</p>
+                                        <p class="card-text"><small class="text-muted">2024/12/34/12:12</small></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr style="border: 1.5px solid rgba(0,0,0,0.25);" class="col-10">
+                    {% endfor %}
+                    <div style="font-size: 30px;font-weight: bold;color: rgba(15,15,15,0.24);margin: 20px"
+                         class="text-center">没有更多了
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+
+        <!- chop car END -!>
+    </div>
+</nav>
+
+{% block content %}
+
+
+{% endblock %}
+
+
+
+<script src="{% static 'plugins/jquery/jquery-3.0.0.min.js' %}"></script>
+<script src="{% static 'plugins/bootstrapv4/js/bootstrap.bundle.min.js' %}"></script>
+{% block js %}
+
+
+{% endblock %}
+</body>
+</html>

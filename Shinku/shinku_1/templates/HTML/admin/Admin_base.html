@@ -1,0 +1,139 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'plugins/bootstrapv4/css/bootstrap.min.css' %}">
+</head>
+<body style="background-color: #373737">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <a class="navbar-brand" href="#">管理员界面</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+
+            <li class="nav-item">
+                <a class="nav-link" href="/admin_order">订单管理</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/admin_goods">商品管理</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/admin_mainType">主要分类管理</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/admin_users">用户管理</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/admin_userGroup">用户组管理</a>
+            </li>
+        </ul>
+        <ul class="navbar-nav float-left" style="margin-right: 100px">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-expanded="false">
+                    Wellcome!!!  {{ request.session.info.name }}
+                </a>
+                <div class="dropdown-menu ">
+                    <a class="dropdown-item" href="/logout/" style="">登出</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Something else</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container col-11" style="margin-top: 1%">
+    <style>
+        .form-control {
+            color: #ffffff;
+            background-color: #373737;
+            background-clip: padding-box;
+            border: 1px solid #656565;
+        }
+
+        .form-control:hover {
+            color: #ffffff;
+            background-color: #292929;
+            background-clip: padding-box;
+            border: 1px solid #656565;
+        }
+
+        .form-control:focus {
+            color: #ffffff;
+            background-color: #292929;
+            background-clip: padding-box;
+            border: 1px solid #656565;
+        }
+
+        .page-link {
+            color: #919191;
+            background-color: #373737;
+            border: 1px solid rgba(255, 255, 255, 0.13);
+        }
+
+        .page-item.active .page-link {
+            z-index: 3;
+            color: #fff;
+            background-color: rgb(101, 101, 101);
+            border-color: rgb(101, 101, 101);
+        }
+
+        .page-link:hover {
+            z-index: 2;
+            color: #fdfdfd;
+            text-decoration: none;
+            background-color: #656565;
+            border-color: #656565;
+        }
+
+        .modal-content {
+            background-color: rgba(22, 29, 28, 0.48);
+            border: 1px solid rgb(97, 97, 97);
+            border-radius: 10px;
+            color: #ffffff;
+            box-shadow: #00eaff6b 0px 0px 100px 5px;
+            backdrop-filter: blur(10px);
+        }
+
+
+        .modal-header {
+            border-bottom: 1px solid #616161;
+        }
+
+        .modal-footer {
+            border-top: 1px solid #616161;
+        }
+
+        .close {
+            color: #ffffff;
+        }
+
+        .close:hover {
+            color: #ffffff;
+        }
+
+
+    </style>
+    <div class="list-group shadow-lg p-3 mb-5  rounded " style="border-radius: 20px;margin-top: 100px">
+        {% block content %}
+
+
+        {% endblock %}
+    </div>
+</div>
+
+
+<script src="{% static 'plugins/jquery/jquery-3.0.0.min.js' %}"></script>
+<script src="{% static 'plugins/bootstrapv4/js/bootstrap.bundle.min.js' %}"></script>
+{% block js %}
+
+
+{% endblock %}
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+    <script src="../static/plugins/jquery/jquery-3.0.0.min.js"></script>
+    <script src="../static/plugins/bootstrapv4/js/bootstrap.min.js"></script>
+    <link href="../static/plugins/bootstrapv4/css/bootstrap.css" rel="stylesheet">
+
+    <title>Title</title>
+    <link href="commen.css" rel="stylesheet">
+    <style>
+        form {
+            text-align: center;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        div {
+            box-shadow: 0px 0px 0px 0px #0f0f0f;
+        }
+
+        .logo {
+            width: 160px;
+            height: 160px;
+            margin: auto;
+            display: block;
+        }
+
+        .class1 {
+            width: 500px;
+            margin-top: 100px;
+            backdrop-filter: blur(20px) hue-rotate(30deg);
+            border-radius: 30px;
+            box-shadow: 0px 0px 30px 1px rgba(0, 0, 0, 0.58);
+        }
+
+        .input_border {
+            border-radius: 15px;
+            height: 45px;
+            width: 400px;
+            margin: auto;
+        }
+    </style>
+</head>
+
+<div class="dropdown">
+    <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false">
+        Dropdown button
+    </button>
+    <div class="dropdown-menu">
+        <a class="dropdown-item" href="#">Action</a>
+        <a class="dropdown-item" href="#">Another action</a>
+        <a class="dropdown-item" href="#">Something else here</a>
+    </div>
+</div>
+<body background="../static/images/login/background.jpg">
+
+<div class="container class1"
+     style="">
+    <div style="height: 70px" class="container text-center"><p style="display: block;margin:auto;">xxx电商</p></div>
+    <img alt="..." class="rounded-circle  logo" src="../static/images/login/logo.png">
+    <div style="height: 30px"></div>
+    <span style="width: 100px">
+    <form action="" method="post">
+    <div class="mb-lg-auto">
+        <label class="form-label" for="exampleInputEmail1"><h3>邮箱</h3></label>
+        <input aria-describedby="emailHelp" class="form-control input_border" id="exampleInputEmail1" type="email">
+    </div>
+
+    <div style="height: 30px"></div>
+
+    <div class="mb-3">
+        <label class="form-label" for="exampleInputPassword1"><h3>密码</h3></label>
+        <input class="form-control input_border" id="exampleInputPassword1" type="password">
+    </div>
+    <div style="height: 30px"></div>
+    <button class="btn btn-primary input_border" style="width: 100px" type="submit">登录</button>
+    </form>
+
+</span>
+    <div style="height: 70px"></div>
+</div>
+<div class="container-fluid col-3 ">
+    <a href="" class="float-right" style="color: #0b2e13">注册</a>
+</div>
+
+</body>
+</html>

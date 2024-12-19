@@ -1,0 +1,316 @@
+{% extends 'HTML/admin/Admin_base.html' %}
+
+{% block content %}
+    <style>
+
+    </style>
+
+    <!-- Button trigger modal -->
+
+
+    <div>
+        <div class="float-left">
+            <button type="button" class="btn btn-success" id="btnAdd">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                     class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                    <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+                </svg>
+                增加用户
+            </button>
+        </div>
+        <!-- 搜索栏 -->
+        <form method="get">
+            <div class="input-group mb-3 float-right" style="width: 300px;">
+                <input type="text" class="form-control" placeholder="搜索商品(名称)" aria-describedby="basic-addon2"
+                       name="str" value="{{ user_input }}">
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-secondary">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                             class="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- 数据表头 -->
+    <li class="list-group-item list-group-item-warning " aria-current="true">
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+             class="bi bi-card-list" viewBox="0 0 16 16">
+            <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
+            <path d="M5 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 5 8zm0-2.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-1-5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zM4 8a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0zm0 2.5a.5.5 0 1 1-1 0 .5.5 0 0 1 1 0z"/>
+        </svg>
+        商品列表
+        {{ btn_show_size }}
+
+
+    </li>
+    <!-- 数据表 -->
+    <table class="table table-striped table-dark">
+        <thead>
+        <tr>
+            {% for field in fields %}
+                <th scope="col">{{ field.verbose_name }}</th>
+            {% endfor %}
+            <th scope="col">操作</th>
+        </tr>
+        </thead>
+
+        <tbody>
+
+        {% for queryset in data %}
+            <tr uid="{{ queryset.id }}">
+                <td>{{ queryset.id }}</td>
+                <td>{{ queryset.name }}</td>
+                <td>
+                    <button uid="{{ queryset.id }}" type="button" class="btn btn-secondary btn-sm edit_btn">修改
+                    </button>
+                    <button uid="{{ queryset.id }}" type="button" class="btn btn-danger btn-sm delete_btn">删除</button>
+                </td>
+            </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+    <!-- 分页 -->
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+
+            {{ page_string }}
+
+
+        </ul>
+    </nav>
+
+    <!-- Modal  add and edit对话框 -->
+    <div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content xxx">
+                <div class="modal-header xxx">
+                    <h5 class="modal-title" id="exampleModalLabel">添加主要分类</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="formAdd">
+                        {% for i in form %}
+                            <div class="form-group">
+                                <label for="exampleFormControlInput1">{{ i.label }}</label>
+                                {{ i }}
+                                <div class="row-form-errors" style="color: red"></div>
+                            </div>
+                        {% endfor %}
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">关闭</button>
+                    <button id="btnAddSave" type="button" class="btn btn-success">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal  delete对话框 -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content"
+                 style="color: red;rgba(139,0,0,0.4); box-shadow: rgba(184,11,11,0.55) 0px 0px 100px 5px">
+                <div class="modal-header" style="color: red">
+                    <h5 class="modal-title" id="exampleModalLabel">警告</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    数据无法恢复，确认要删除吗？
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">取消</button>
+                    <button id="btnConfirmDelete" type="button" class="btn btn-danger">确认删除</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+
+
+{% block js %}
+    <script type="text/javascript">
+        var DELETE_ID;
+        var EDIT_ID
+
+        $(function () {
+            bindBtnAddEvent();
+            bindBtnSaveEvent();
+
+            bindBtnEditEvent();
+            bindBtnEditSaveEvent();
+
+            bindBtnDeleteEvent();
+            bindBtnConfirmDelete();
+        })
+
+        function bindBtnAddEvent() {
+            $('#btnAdd').click(function () {
+                //点击add按钮新建对话框
+                EDIT_ID = undefined;
+                //设置样式
+                $('.xxx').attr('style', 'color:#279941;');
+
+                //删除上一个对话框数据
+                $('#formAdd')[0].reset();
+                //显示对话框
+                $('#myModal').modal('show');
+            })
+        }
+
+
+        function bindBtnSaveEvent() {
+
+            $("#btnAddSave").click(function () {
+                $(".row-form-errors").empty();
+
+                if (Boolean(EDIT_ID)) {
+                    //编辑
+                    $.ajax({
+                        url: "/admin_mainType/" + EDIT_ID + "/edit/",
+                        type: "post",
+                        data: $("#formAdd").serialize(),
+                        dataType: "JSON",
+                        //添加CSRF_TOKEN亲求头
+                        beforeSend: function (xhr, settings) {
+                            xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+                        },
+                        success: function (res) {
+                            if (res.status) {
+                                //成功
+                                $("#formAdd")[0].reset();
+                                alert("修改成功");
+                                $('#myModal').modal('hide');
+                                window.location.reload();
+
+                            } else {
+                                //失败
+                                if (res.tips) {
+                                    //数据不存在
+                                    alert(res.tips);
+                                } else {
+                                    $.each(res.error, function (name, errorList) {
+                                        $("#id_" + name).next().text(errorList[0])
+                                    })
+                                }
+                            }
+                            console.log(res);
+                        }
+
+                    })
+                } else {
+                    //添加
+                    $.ajax({
+                        url: "/admin_mainType/add/",
+                        type: "post",
+                        data: $("#formAdd").serialize(),
+                        dataType: "JSON",
+                        //添加CSRF_TOKEN亲求头
+                        beforeSend: function (xhr, settings) {
+                            xhr.setRequestHeader("X-CSRFToken", "{{ csrf_token }}");
+                        },
+                        success: function (res) {
+                            if (res.status) {
+                                //添加成功
+                                $("#formAdd")[0].reset();
+                                alert("创建成功");
+                                $('#myModal').modal('hide');
+                                window.location.reload();
+                            } else {
+                                //错误信息
+                                $.each(res.error, function (name, errorList) {
+                                    $("#id_" + name).next().text(errorList[0])
+                                })
+
+                            }
+                            console.log(res);
+                        }
+                    })
+                }
+
+
+            })
+        }
+
+        function bindBtnEditEvent() {
+            $('.edit_btn').click(function () {
+
+                //通过id获取当前数据\
+                var uid = $(this).attr('uid');
+                EDIT_ID = uid;
+                $.ajax({
+                    url: "/admin_mainType/" + uid + "/edit/",
+                    type: "get",
+                    success: function (res) {
+                        if (res.status) {
+                            //删除上一个对话框数据
+                            $('#formAdd')[0].reset();
+
+                            //数据加载到对话框
+                            $.each(res.data, function (name, value) {
+                                {#console.log(name,name);#}
+                                $('#id_' + name).val(value);
+                            })
+                            //点击add按钮新建对话框
+                            $('.xxx').attr('style', 'color:#6B747CFF;');
+                            $('#exampleModalLabel').text("编辑");
+                            //show modal
+                            $('#myModal').modal('show');
+                        } else {
+                            alert(res.error);
+                        }
+
+                    }
+                })
+            })
+        }
+
+        function bindBtnEditSaveEvent() {
+
+            $("#btnAddSave").click(function () {
+                $(".row-form-errors").empty();
+
+            })
+        }
+
+        function bindBtnDeleteEvent() {
+            $('.delete_btn').click(function () {
+                //点击删除
+                $("#deleteModal").modal('show');
+                //获取删除对象ID
+                DELETE_ID = $(this).attr('uid');
+
+            })
+        }
+
+        function bindBtnConfirmDelete() {
+            $("#btnConfirmDelete").click(function () {
+                $.ajax({
+                    url: "admin_mainType/" + DELETE_ID + "/delete/",
+                    type: "get",
+                    dataType: "JSON",
+                    success: function (res) {
+                        if (res.status) {
+                            $("#deleteModal").modal('hide');
+                            $("tr[uid='" + DELETE_ID + "']").remove();
+                        } else {
+                            alert(res.error);
+                        }
+                    }
+                })
+            })
+        }
+
+    </script>
+{% endblock %}
